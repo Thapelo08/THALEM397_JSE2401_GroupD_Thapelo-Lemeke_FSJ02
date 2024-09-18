@@ -10,4 +10,11 @@ export default function SearchBar({ initialSearch = ''}) {
         updateURL({ search });
     };
 
+    const updateURL = (params) => {
+        const currentParams = new URLSearchParams(window.location.search);
+        Object.entries(params).forEach(([key, value]) => {
+            
+        })
+    }
+
     }
