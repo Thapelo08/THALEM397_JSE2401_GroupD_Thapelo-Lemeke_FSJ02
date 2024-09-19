@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SearchBar({ initialSearch = ''}) {
     const [search, setSearch] = useState(initialSearch);
