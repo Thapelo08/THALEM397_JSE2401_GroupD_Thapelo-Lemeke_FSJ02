@@ -1,7 +1,6 @@
 'use client';
 import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { notFound } from 'next/navigation';
 import ProductGrid from '../components/ProductGrid';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
