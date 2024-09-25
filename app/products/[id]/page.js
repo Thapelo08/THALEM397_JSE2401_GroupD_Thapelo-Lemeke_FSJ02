@@ -1,27 +1,10 @@
-'use client';
+"use client";
 
-import { Suspense, useEffect, useState } from 'react';
-import { Metadata } from 'next';
-import { notFound, useParams, useRouter, useSearchParams } from 'next/navigation';
+import {  useEffect, useState } from 'react';
+import {  useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import getProduct from '../../api'; // Assuming this is your product fetching API.
 
-// Server-Side: Generate metadata for SEO
-export async function generateMetadata({ params }) {
-  const product = await getProduct(params.id);
-
-  if (!product) {
-    return {
-      title: 'Product Not Found',
-      description: 'The requested product could not be found.',
-    };
-  }
-
-  return {
-    title: product.title,
-    description: product.description,
-  };
-}
 
 export default function ProductPage({ params }) {
   const [product, setProduct] = useState(null);
