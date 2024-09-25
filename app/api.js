@@ -1,16 +1,4 @@
-/**
- * Fetches product details from the API based on the provided product ID.
- *
- * @async
- * @function getProduct
- * @param {string} productId - The ID of the product to fetch.
- * @returns {Promise<Object>} - A promise that resolves to the product data or an error object.
- * @throws {Error} - Throws an error if the fetch operation fails or if the response is not OK.
- *
- * @example
- * const product = await getProduct('12345');
- * console.log(product);
- */
+
 export default async function getProduct(productId) {
     try {
         const res = await fetch(`https://next-ecommerce-api.vercel.app/products/${productId}`);
@@ -25,3 +13,20 @@ export default async function getProduct(productId) {
         return {error};
     }
 }
+
+
+export async function generateMetadata({ params }) {
+    const product = await getProduct(params.id);
+  
+    if (!product) {
+      return {
+        title: 'Product Not Found',
+        description: 'The requested product could not be found.',
+      };
+    }
+  
+    return {
+      title: product.title,
+      description: product.description,
+    };
+  }
