@@ -12,7 +12,7 @@ export const Metadata = {
 };
 
 async function getServerSideProducts(searchParams) {
-  const { search, category, sort, page = 1 } = searchParams;
+  const { search, category, order, page = 1 } = searchParams;
   const limit = 20;
   const skip = (page - 1) * limit;
   const queryParams = new URLSearchParams({
@@ -20,7 +20,7 @@ async function getServerSideProducts(searchParams) {
     skip: skip.toString(),
     ...(search && { search }),
     ...(category && { category }),
-    ...(sort && { sort }),
+    ...(order && { order }),
   });
 
   const res = await fetch(`https://next-ecommerce-api.vercel.app/products?${queryParams}`, {
@@ -43,12 +43,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Filters stored in state
   const [filters, setFilters] = useState({
     search: searchParams.get('search') || '',
     category: searchParams.get('category') || '',
-    sort: searchParams.get('sort') || '',
+    sort: searchParams.get('order') || '',
     page: Number(searchParams.get('page')) || 1,
   });
 
@@ -60,7 +61,7 @@ export default function Home() {
   const fetchClientSideProducts = async () => {
     setLoading(true);
     try {
-      const { search, category, sort, page } = filters;
+      const { search, category, order, page } = filters;
       const limit = 20;
       const skip = (page - 1) * limit;
       const queryParams = new URLSearchParams({
@@ -68,7 +69,7 @@ export default function Home() {
         skip: skip.toString(),
         ...(search && { search }),
         ...(category && { category }),
-        ...(sort && { sort }),
+        ...(order && { order }),
       });
 
       const response = await fetch(`https://next-ecommerce-api.vercel.app/products?${queryParams}`, { cache: 'no-store' });
@@ -80,6 +81,7 @@ export default function Home() {
       const data = await response.json();
       setProducts(data);
       setTotalPages(Math.ceil(data.total / limit));
+      setCurrentPage(page);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -107,7 +109,7 @@ export default function Home() {
 
   // Reset filters
   const resetFilters = () => {
-    setFilters({ search: '', category: '', sort: '', page: 1 });
+    setFilters({ search: '', category: '', order: '', page: 1 });
     router.push('/', undefined, { shallow: true });
   };
 
@@ -137,9 +139,9 @@ export default function Home() {
         <SearchBar initialSearch={filters.search} onSearch={(search) => updateFilters({ search })} />
         <FilterSort
           initialCategory={filters.category}
-          initialSort={filters.sort}
+          initialSort={filters.order}
           onCategoryChange={(category) => updateFilters({ category })}
-          onSortChange={(sort) => updateFilters({ sort })}
+          onSortChange={(order) => updateFilters({ order })}
         />
         <button
           onClick={resetFilters}
@@ -153,9 +155,11 @@ export default function Home() {
           <>
             <ProductGrid products={products} />
             <Pagination
-              currentPage={filters.page}
+              currentPage={currentPage}
               totalPages={totalPages}
+              hasMore={products.length === 20}
               onPageChange={(page) => updateFilters({ page })}
+
             />
           </>
         )}
