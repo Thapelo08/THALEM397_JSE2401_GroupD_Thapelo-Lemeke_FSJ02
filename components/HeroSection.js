@@ -3,8 +3,9 @@ import { ShoppingCart } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    <div className="bg-gradient-to-r from-pink-500 to-red-700 text-white">
-      <div className="container mx-auto px-4 py-16 sm:py-24 lg:py-32">
+    <div className="bg-gradient-to-r from-pink-500 to-red-700 text-white mx-auto px-4 py-4
+    "> 
+      <div className="container mx-auto px-4 py-16 sm:py-24 lg:py-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
@@ -17,13 +18,6 @@ const HeroSection = () => {
               <ShoppingCart className="mr-2" />
               Start Shopping
             </button>
-          </div>
-          <div className="hidden lg:block">
-            <img 
-              src="/api/placeholder/600/400" 
-              alt="Featured Products" 
-              className="rounded-lg shadow-2xl"
-            />
           </div>
         </div>
       </div>

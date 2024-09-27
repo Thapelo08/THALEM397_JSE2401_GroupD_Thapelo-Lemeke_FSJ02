@@ -117,7 +117,7 @@ export default function ProductHome() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-pink-50 dark:bg-gray-900 transition-colors duration-300">
       <HeroSection />
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">Explore Our Products</h2>

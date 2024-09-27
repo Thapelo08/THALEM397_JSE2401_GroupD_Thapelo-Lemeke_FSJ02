@@ -69,7 +69,7 @@ export default function ProductCard({ product }) {
             src={getImageSrc()}
             alt={product.title}
             fill 
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain' }}
             className="transition-transform duration-300 hover:scale-110"
             onError={() => setImageError(true)}
           />

@@ -77,7 +77,7 @@ export default function ProductPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-pink-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto px-4 py-8">
         <button
           onClick={handleBackToProducts}
@@ -164,7 +164,7 @@ export default function ProductPage({ params }) {
                 </span>
               </p>
               <button
-                className="flex items-center justify-center w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors duration-200"
+                className="flex items-center bg-gradient-to-r from-pink-500 to-red-700 text-white justify-center w-full  text-white px-6 py-3 rounded-full  transition-colors duration-200"
                 disabled={product.stock <= 0}
               >
                 <ShoppingCart className="mr-2" />
@@ -189,13 +189,13 @@ export default function ProductPage({ params }) {
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Customer Reviews</h2>
             <div className="flex justify-between mb-4">
-              <span className="text-gray-700 dark:text-gray-200">
+              <span className="text-gray-700 dark:text-gray-700">
                 {product.reviews.length} review(s)
               </span>
               <select
                 value={sortReviewsBy}
                 onChange={(e) => setSortReviewsBy(e.target.value)}
-                className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full"
+                className="bg-gradient-to-r from-pink-500 to-red-700 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full"
               >
                 <option value="date">Sort by Date</option>
                 <option value="rating">Sort by Rating</option>
