@@ -81,7 +81,7 @@ export default function ProductPage({ params }) {
       <div className="container mx-auto px-4 py-8">
         <button
           onClick={handleBackToProducts}
-          className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 mb-8"
+          className="bg-gradient-to-r from-pink-500 to-red-700 text-white inline-block bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 mb-8"
         >
           ← Back to Products
         </button>
