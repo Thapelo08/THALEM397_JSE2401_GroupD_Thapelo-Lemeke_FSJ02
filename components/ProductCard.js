@@ -1,37 +1,9 @@
 'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-/**
- * ProductCard component displays a card with product details, including images, title, price, category, rating, and stock status.
- * It includes image carousel functionality for products with multiple images.
- *
- * @component
- * @param {Object} props - The component props.
- * @param {Object} props.product - The product data to display.
- * @param {string} props.product.id - The unique identifier of the product.
- * @param {string} props.product.title - The title of the product.
- * @param {string[]} props.product.images - Array of image URLs for the product.
- * @param {number} props.product.price - The price of the product.
- * @param {string} [props.product.category] - The category of the product. Defaults to 'uncategorized' if not provided.
- * @param {number} props.product.rating - The rating of the product out of 5.
- * @param {number} props.product.stock - The stock count of the product.
- *
- * @returns {JSX.Element} The rendered ProductCard component with product details and image carousel.
- *
- * @example
- * const product = {
- *   id: '1',
- *   title: 'Product Title',
- *   images: ['image1.jpg', 'image2.jpg'],
- *   price: 29.99,
- *   category: 'Electronics',
- *   rating: 4.5,
- *   stock: 10
- * };
- * return <ProductCard product={product} />;
- */
 export default function ProductCard({ product }) {
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -69,6 +41,7 @@ export default function ProductCard({ product }) {
             src={getImageSrc()}
             alt={product.title}
             fill 
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: 'contain' }}
             className="transition-transform duration-300 hover:scale-110"
             onError={() => setImageError(true)}
