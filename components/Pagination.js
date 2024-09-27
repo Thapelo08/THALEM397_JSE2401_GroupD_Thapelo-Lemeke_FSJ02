@@ -1,29 +1,36 @@
 'use client';
 
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-export default function Pagination({ currentPage, totalPages, hasMore = true }) {
-const generatePageLink = (page) => `/page=${page}`;
+export default function Pagination({ currentPage, totalPages, loading, products = [], onPageChange }) {
+  const [page, setPage] = useState(currentPage);
 
-    return (
-        <div className="flex justify-center items-center space-x-4 my-12">
-            {currentPage > 1 && (
-                <Link 
-                    href={generatePageLink(currentPage - 1)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
-                >
-                    Previous
-                </Link>
-            )}
-            <span className="text-lg font-medium">Page {currentPage}</span>
-            {( currentPage < totalPages || hasMore) && (
-                <Link 
-                    href={generatePageLink(currentPage + 1)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
-                >
-                    Next
-                </Link>
-            )}
-        </div>
-    );
+  useEffect(() => {
+    setPage(currentPage);
+  }, [currentPage]);
+
+  const handlePagination = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    onPageChange(newPage);  // Trigger page change in the parent component
+  };
+
+  return (
+    <div className="flex justify-between items-center mt-8">
+      <button
+        onClick={() => handlePagination(Math.max(1, page - 1))}
+        disabled={page === 1 || loading}
+        className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? "Loading..." : "Previous"}
+      </button>
+      <span className="font-semibold text-gray-700">Page {page}</span>
+      <button
+        onClick={() => handlePagination(page + 1)}
+        disabled={page >= totalPages || loading}
+        className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? "Loading..." : "Next"}
+      </button>
+    </div>
+  );
 }
