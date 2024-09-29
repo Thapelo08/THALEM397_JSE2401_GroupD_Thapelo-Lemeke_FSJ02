@@ -127,7 +127,7 @@ export default function ProductHome() {
             initialCategory={filters.category}
             initialSort={filters.sort}
             onCategoryChange={(category) => updateFilters({ category })}
-            onSortChange={(sort) => updateFilters({ sort })}
+            onSortChange={(order) => updateFilters({ order })}
           />
           <button
             onClick={resetFilters}
