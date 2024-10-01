@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${product.title} | Family Store`,
+    title: `${product.title} | Stylish Store`,
     description: product.description,
   };
 }
